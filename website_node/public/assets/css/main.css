@@ -304,6 +304,38 @@ button {
   /* backdrop-filter: blur(2px); */
 }
 
+/* Authors Section */
+.authors-section {
+  margin: 100px 0 10px 0;
+  text-align: center;
+  width: 100%;
+  padding: 0 5px;
+}
+
+.authors-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px 45px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.author-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #868686;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.author-name:hover {
+  color: #2c2c2c;
+  text-decoration: underline;
+  transform: translateY(-2px);
+}
+
 /* Logo Section */
 .logo-section {
   width: 150%;
@@ -348,12 +380,15 @@ button {
 }
 
 .section-description {
-  font-size: 15px;
+  font-size: 18px;
   font-family: 'Arial', sans-serif;
   font-weight: 400;
-  line-height: 21px;
+  line-height: 25px;
   color: #6e6e6e;
   width: 100%;
+  text-align: justify;
+  margin: 0 70px;
+  max-width: 1000px;
 }
 
 /* Stats Grid */
@@ -953,6 +988,10 @@ button {
     font-size: 20px;
   }
   
+  .author-name {
+    font-size: 15px;
+  }
+  
   .section-title {
     font-size: 48px;
   }
@@ -1000,6 +1039,10 @@ button {
   
   .hero-title {
     font-size: 40px;
+  }
+  
+  .author-name {
+    font-size: 22px;
   }
   
   .section-title {
