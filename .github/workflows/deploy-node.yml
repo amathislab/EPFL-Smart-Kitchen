@@ -3,8 +3,7 @@ name: Deploy Node.js Website
 on:
   push:
     branches:
-      - main
-      - master
+      - website
     paths:
       - 'website_node/**'
       - '.github/workflows/deploy-node.yml'
