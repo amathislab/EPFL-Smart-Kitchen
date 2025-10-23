@@ -1,0 +1,63 @@
+name: Test Node.js Website
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'website_node/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'website_node/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: website_node/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: ./website_node
+        run: npm ci
+      
+      - name: Copy assets
+        working-directory: ./website_node
+        run: npm run build
+      
+      - name: Check if server starts
+        working-directory: ./website_node
+        run: |
+          timeout 10 node server.js &
+          SERVER_PID=$!
+          sleep 5
+          
+          # Check if server is running
+          if curl -f http://localhost:3000 > /dev/null 2>&1; then
+            echo "✅ Server started successfully"
+            kill $SERVER_PID
+            exit 0
+          else
+            echo "❌ Server failed to start"
+            kill $SERVER_PID || true
+            exit 1
+          fi
+      
+      - name: Lint check (if you add linting later)
+        working-directory: ./website_node
+        run: echo "No linting configured yet"
+        continue-on-error: true
