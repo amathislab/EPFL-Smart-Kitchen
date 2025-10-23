@@ -50,9 +50,6 @@ app.get('/dataset', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/esk.html'));
 });
 
-// (Removed server-side redirect from /pages/esk.html to /dataset)
-// This lets client-side navigation from index.html to ./pages/esk.html keep
-// the URL as /pages/esk.html instead of being redirected to /dataset.
 
 // 404 handler
 app.use((req, res) => {

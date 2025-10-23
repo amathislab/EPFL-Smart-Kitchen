@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESK Website - Redirecting</title>
     <link rel="stylesheet" href="./assets/css/index.css" />
   
     <script>
         // Redirect to one page by default
         window.onload = function() {
-            window.location.href = "./pages/esk.html";
+            // Optional: add a small delay so users can see the message
+            setTimeout(function() {
+                window.location.href = "./pages/esk.html";
+            }, 1000); // 1 second delay
         }
     </script>
-<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fandysapp4824back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
 </head>
 <body class="bg-background">
     <div class="min-h-screen flex items-center justify-center">
@@ -19,13 +22,12 @@
             <h1 class="text-2xl font-semibold text-text-primary">Redirecting...</h1>
             <p class="mt-2 text-text-secondary">Please wait while we redirect you to a page.</p>
             <div class="mt-4">
-                 <p class="text-text-secondary">If you are not redirected automatically, please choose a page:</p>
+                <p class="text-text-secondary">If you are not redirected automatically, please choose a page:</p>
                 <div class="mt-2 space-y-2">
-                        <a href="./pages/esk.html" class="block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover transition-colors">esk</a>
-                    </div>
+                    <a href="./pages/esk.html" class="block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover transition-colors">esk</a>
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>
