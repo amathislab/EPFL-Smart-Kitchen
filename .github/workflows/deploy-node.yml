@@ -3,7 +3,8 @@ name: Deploy Node.js Website
 on:
   push:
     branches:
-      - website
+      - main
+      - master
     paths:
       - 'website_node/**'
       - '.github/workflows/deploy-node.yml'
@@ -43,10 +44,6 @@ jobs:
       - name: Install dependencies
         working-directory: ./website_node
         run: npm ci
-      
-      - name: Build static site
-        working-directory: ./website_node
-        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

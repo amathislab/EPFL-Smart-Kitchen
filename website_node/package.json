@@ -6,8 +6,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "echo 'No build step configured; using files in public/'",
-    "copy-assets": "node scripts/copy-assets.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
