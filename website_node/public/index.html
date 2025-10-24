@@ -3,29 +3,58 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ESK Website - Redirecting</title>
+    <title>EPFL Smart Kitchen</title>
     <link rel="stylesheet" href="./assets/css/index.css" />
   
     <script>
-        // Redirect to one page by default
+        // Redirect to one page by default with smooth fade out
         window.onload = function() {
-            // Optional: add a small delay so users can see the message
             setTimeout(function() {
-                window.location.href = "./pages/esk.html";
-            }, 1000); // 1 second delay
+                // Add fade-out class to body
+                document.body.classList.add('fade-out');
+                
+                // Wait for fade-out animation to complete before redirecting
+                setTimeout(function() {
+                    window.location.href = "./pages/esk.html";
+                }, 200); // Wait for fade animation to complete
+            }, 2000); // Initial delay before starting fade
         }
+        
+        // Handle manual link click with fade effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const manualLink = document.querySelector('.link');
+            manualLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(function() {
+                    window.location.href = "./pages/esk.html";
+                }, 300);
+            });
+        });
     </script>
 </head>
-<body class="bg-background">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-2xl font-semibold text-text-primary">Redirecting...</h1>
-            <p class="mt-2 text-text-secondary">Please wait while we redirect you to a page.</p>
-            <div class="mt-4">
-                <p class="text-text-secondary">If you are not redirected automatically, please choose a page:</p>
-                <div class="mt-2 space-y-2">
-                    <a href="./pages/esk.html" class="block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover transition-colors">esk</a>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+                        <!-- Outer plate rim -->
+                        <circle cx="50" cy="50" r="38" fill="white" stroke="white" stroke-width="2"/>
+                        <!-- Inner plate surface -->
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                        <!-- Plate center detail -->
+                        <circle cx="50" cy="50" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    </svg>
                 </div>
+            </div>
+            <h1 class="title">EPFL Smart Kitchen</h1>
+            <p class="subtitle">Loading ...</p>
+            <div class="loader">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="manual-link">
+                <a href="./pages/esk.html" class="link">Continue manually →</a>
             </div>
         </div>
     </div>
