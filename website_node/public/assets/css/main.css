@@ -58,6 +58,14 @@ button {
   align-items: center;
 }
 
+.authors-footnote {
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  color: #888888;
+  margin-top: 10px;
+  font-style: italic;
+}
+
 .section-container {
   width: 100%;
   display: flex;
