@@ -5,7 +5,6 @@ on:
     branches:
       - website
     paths:
-      - 'website_node/**'
       - '.github/workflows/deploy-node.yml'
   workflow_dispatch:
 
@@ -27,27 +26,29 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Generate package-lock.json for caching
-        working-directory: ./website_node
-        run: npm install --package-lock-only
+        working-directory: ./
+        run: |
+          npm install --package-lock-only
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '25'
           cache: 'npm'
-          cache-dependency-path: website_node/package-lock.json
+          cache-dependency-path: ./package-lock.json
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
       - name: Install dependencies
-        working-directory: ./website_node
-        run: npm ci
+        working-directory: ./
+        run: |
+          npm ci
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./website_node/public
+          path: ./public
   
   deploy:
     environment:

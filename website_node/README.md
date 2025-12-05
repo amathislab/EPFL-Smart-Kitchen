@@ -49,7 +49,6 @@ Visit: `http://localhost:3000`
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd website_node
 ```
 
 2. Install dependencies:
