@@ -1,13 +1,13 @@
 # EPFL-Smart-Kitchen
 
-![](https://img.shields.io/badge/ESK30-Website-red)(https://amathislab.github.io/EPFL-Smart-Kitchen/)
+[![](https://img.shields.io/badge/ESK30-Website-red)](https://amathislab.github.io/EPFL-Smart-Kitchen)
 [![](https://img.shields.io/badge/ESK30-Paper-green)](https://arxiv.org/abs/2506.01608)
 
 [![](https://img.shields.io/badge/Zenodo-Videos-blue)](https://zenodo.org/records/15535461)
 [![](https://img.shields.io/badge/Zenodo-Annotations_and_pose-blue)](https://zenodo.org/records/15551913)
 [![](https://img.shields.io/badge/HuggingFace-Lemonade-yellow)](https://huggingface.co/datasets/amathislab/LEMONADE)
 
-![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-black)(https://github.com/amathislab/EPFL-Smart-Kitchen/blob/main/LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-black)](https://github.com/amathislab/EPFL-Smart-Kitchen/blob/main/LICENSE)
 
 
 
