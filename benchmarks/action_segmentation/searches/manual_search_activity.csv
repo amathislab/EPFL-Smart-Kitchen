@@ -1,0 +1,5 @@
+best_params,Models
+"{'losses/ms_tcn/alpha': 0.002735445357635184, 'losses/ms_tcn/focal': True, 'training/temporal_subsampling_size': 0.7979891904910363, 'general/len_segment': 256, 'losses/ms_tcn/weights': None}",search_edtcn
+"{'losses/ms_tcn/alpha': 5.988406178704276e-05, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.822699163459011, 'model/num_layers_PG': 15, 'model/shared_weights': True, 'model/num_layers_R': 8, 'model/num_f_maps': 123, 'general/len_segment': 256, 'losses/ms_tcn/weights': None}",search_ms_tcn3
+"{'losses/ms_tcn/alpha': 0.0009214588611023452, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.7504826724724075, 'model/num_f_maps': 128, 'general/len_segment': 1024, 'losses/ms_tcn/weights': 'dataset_inverse_weights'}",search_c2f_tcn
+"{'losses/ms_tcn/alpha': 1.665718100543724e-05, 'losses/ms_tcn/focal': True, 'training/temporal_subsampling_size': 0.9416127521639137, 'model/num_f_maps': 128, 'model/heads': 4, 'general/len_segment': 512, 'losses/ms_tcn/weights': None}",search_c2f_transformer

@@ -1,0 +1,7 @@
+best_params,Models
+"{'losses/ms_tcn/alpha': 0.00013109384376475084, 'losses/ms_tcn/focal': True, 'training/temporal_subsampling_size': 0.8001807623115116, 'model/dropout_rates': 0.30256033862504716}",search_mlp
+"{'losses/ms_tcn/alpha': 5.143087147398712e-05, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.8362303318495533, 'model/num_layers_PG': 14, 'model/shared_weights': False, 'model/num_layers_R': 10, 'model/num_f_maps': 106, 'general/len_segment': 256}",search_ms_tcn3
+"{'losses/ms_tcn/alpha': 0.00014139082464209864, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.9482056405154436, 'model/num_f_maps': 59, 'general/len_segment': 512}",search_c2f_tcn
+"{'losses/ms_tcn/alpha': 2.0082644290010193e-05, 'losses/ms_tcn/focal': True, 'training/temporal_subsampling_size': 0.901463524066646, 'model/num_f_maps': 32, 'model/heads': 1, 'general/len_segment': 512}",search_c2f_transformer
+"{'losses/ms_tcn/alpha': 3.350836362564484e-05, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.8966603124574797, 'general/len_segment': 256}",search_edtcn
+"{'losses/ms_tcn/alpha': 0.00039717235595846827, 'losses/ms_tcn/focal': False, 'training/temporal_subsampling_size': 0.8434510035517794, 'model/N': 6, 'model/heads': 4, 'model/num_pool': 0, 'model/add_batchnorm': False, 'general/len_segment': 64}",search_transformer
