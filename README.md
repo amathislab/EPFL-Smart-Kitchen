@@ -11,10 +11,10 @@
 
 
 
-- [Abstract](#abstract)
-- [Download our dataset](#find-our-dataset)
-- [Run our benchmarks](#run-our-benchmarks)
-- [Publications](#publications)
+- [Abstract](#-abstract)
+- [Download our dataset](#-find-our-datasets)
+- [Run our benchmarks](#-run-our-benchmarks)
+- [Citations](#-citations)
 
 ## 📚 Abstract
 
