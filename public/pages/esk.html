@@ -584,12 +584,10 @@
         let index = 1;
         const concurrency = 8;
         let activeDownloads = 0;
+        let completeFired = false;
         
         function loadNext() {
           if (index > totalFrames) {
-            if (activeDownloads === 0 && loadedCount === totalFrames) {
-              onComplete();
-            }
             return;
           }
           
@@ -601,11 +599,16 @@
           img.onload = img.onerror = () => {
             loadedCount++;
             activeDownloads--;
-            onProgress(loadedCount / totalFrames);
             
-            if (loadedCount === totalFrames) {
+            // Artificial progress bar just to look smooth, or we can just send 1 to hide it
+            onProgress(1.0); 
+            
+            if (loadedCount >= 1 && !completeFired) {
+              completeFired = true;
               onComplete();
-            } else {
+            }
+            
+            if (loadedCount < totalFrames) {
               loadNext();
             }
           };
