@@ -224,7 +224,7 @@
           </div>
         </section>
 
-      </div>
+      </div> <!-- End of canvas-sticky-wrapper -->
 
       <!-- Immersive content overlay panels -->
       <div class="immersive-content-wrapper">
@@ -651,18 +651,17 @@
             y = (canvasHeight - drawHeight) / 2;
           }
         } else {
-          // Mobile/Tablet: center 3D model and use full size
+          // Mobile: 3D model centered in the screen
+          const scale = 0.72;
           if (canvasRatio > imgRatio) {
-            drawHeight = canvasHeight;
-            drawWidth = canvasHeight * imgRatio;
-            x = (canvasWidth - drawWidth) / 2;
-            y = 0;
+            drawHeight = canvasHeight * scale;
+            drawWidth = drawHeight * imgRatio;
           } else {
-            drawWidth = canvasWidth;
-            drawHeight = canvasWidth / imgRatio;
-            x = 0;
-            y = (canvasHeight - drawHeight) / 2;
+            drawWidth = canvasWidth * scale;
+            drawHeight = drawWidth / imgRatio;
           }
+          x = (canvasWidth - drawWidth) / 2;   // center horizontally
+          y = (canvasHeight - drawHeight) / 2;  // center vertically
         }
         
         ctx.drawImage(img, x, y, drawWidth, drawHeight);
@@ -712,16 +711,19 @@
 
         // 2. Video styling (stickyVideo & videoOverlay)
         if (stickyVideo) {
-          const videoScale = interpolate(progress, 0.0, 0.08, 1.0, 0.7);
-          const isDesktop = window.innerWidth > 991;
-          const targetTranslateX = isDesktop ? -68 : -50;
-          const videoTranslateX = interpolate(progress, 0.0, 0.08, -50, targetTranslateX);
-          const videoBrightness = interpolate(progress, 0.0, 0.08, 0.22, 0.9);
           const videoOpacity = interpolate(progress, 0.24, 0.30, 1.0, 0.0);
-
+          const videoBrightness = interpolate(progress, 0.0, 0.08, 0.22, 0.9);
           stickyVideo.style.opacity = videoOpacity;
-          stickyVideo.style.transform = `translate(${videoTranslateX}%, -50%) scale(${videoScale})`;
           stickyVideo.style.filter = `brightness(${videoBrightness}) contrast(1.05)`;
+          if (window.innerWidth > 991) {
+            // Desktop: shrink and shift left as scroll begins
+            const videoScale = interpolate(progress, 0.0, 0.08, 1.0, 0.7);
+            const videoTranslateX = interpolate(progress, 0.0, 0.08, -50, -68);
+            stickyVideo.style.transform = `translate(${videoTranslateX}%, -50%) scale(${videoScale})`;
+          } else {
+            // Mobile: stay full screen — no scale, no shift
+            stickyVideo.style.transform = 'translate(-50%, -50%) scale(1)';
+          }
         }
         if (videoOverlay) {
           const overlayOpacity = interpolate(progress, 0.0, 0.08, 1.0, 0.0);
@@ -807,16 +809,17 @@
           opacities[4] = 0;
         }
 
-        // Panel 5: Download (panels[5]) - paused on frame 110
-        if (progress <= 0.89) {
+        // Panel 5: Download (panels[5]) - appears after animation reaches frame 110
+        if (progress <= 0.95) {
           opacities[5] = 0;
-        } else if (progress <= 0.93) {
-          opacities[5] = interpolate(progress, 0.89, 0.93, 0.0, 1.0);
+        } else if (progress <= 0.99) {
+          opacities[5] = interpolate(progress, 0.95, 0.99, 0.0, 1.0);
         } else {
           opacities[5] = 1.0;
         }
 
         // Apply opacities and pointer events to panels 1 to 5
+        // Apply opacities and pointer events to panels 1 to 5 (desktop and mobile)
         for (let i = 1; i <= 5; i++) {
           if (panels[i]) {
             panels[i].style.opacity = opacities[i];
@@ -892,6 +895,22 @@
           }
         });
       }
+
+      // Prevent panels from trapping touch-scroll events (iOS Safari safeguard).
+      // When a scroll gesture starts on a panel, we track the start Y and on
+      // touchmove we manually forward the delta to window.scrollBy so the page
+      // scroll always wins — no internal panel scrolling is possible.
+      let touchStartY = 0;
+      document.querySelectorAll('.scroll-fade-panel').forEach(function(panel) {
+        panel.addEventListener('touchstart', function(e) {
+          touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        panel.addEventListener('touchmove', function(e) {
+          const delta = touchStartY - e.touches[0].clientY;
+          touchStartY = e.touches[0].clientY;
+          window.scrollBy(0, delta);
+        }, { passive: true });
+      });
     });
   </script>
 </body>

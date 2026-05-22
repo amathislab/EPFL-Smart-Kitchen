@@ -1865,8 +1865,7 @@ body {
   padding: 50px 40px !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8) !important;
   transition: opacity 0.15s ease;
-  max-height: 85vh;
-  overflow-y: auto;
+  /* No max-height / overflow-y — no internal scroll competition */
 }
 
 /* Individual Panel Layouts (Desktop >= 992px) */
@@ -1877,9 +1876,7 @@ body {
     transform: translateY(-10%) !important;
     width: 30% !important;
     max-width: 1200px !important;
-    max-height: 88vh !important;
     padding: 100px 45px !important;
-    overflow-y: auto !important;
   }
 
   [id="3d-model"] {
@@ -1889,31 +1886,23 @@ body {
     transform: translateY(-50%) !important;
     width: 100% !important;
     max-width: 1700px !important;
-    max-height: 88vh !important;
     padding: 60px 45px !important;
-    overflow-y: auto !important;
   }
 
   #annotations {
     right: 3% !important;
     left: auto !important;
-    /* transform: translateY(-50%) !important; */
     width: 100% !important;
     max-width: 1550px !important;
-    max-height: 88vh !important;
     padding: 40px 45px !important;
-    overflow-y: auto !important;
   }
 
   [id="3d-motions"] {
     right: 3% !important;
     left: auto !important;
-    /* transform: translateY(-99%) !important; */
     width: 50% !important;
     max-width: 1350px !important;
-    max-height: 88vh !important;
     padding: 40px 45px !important;
-    overflow-y: auto !important;
   }
 }
 
@@ -2061,20 +2050,50 @@ body {
 
 /* Responsive Overrides */
 @media (max-width: 991px) {
-  .immersive-content-wrapper {
-    margin-top: -100vh;
-    padding: 0 20px;
+  /* On mobile: sticky canvas stays visible in the top ~45% of the screen;
+     the 3D model is drawn smaller and pinned to the top portion.
+     Panels anchor to the bottom 55% and are controlled by JS opacity (single scroll). */
+
+  /* More scroll track so animation gaps between panels are clearly visible */
+  .immersive-scroll-container {
+    height: 900vh !important;
   }
 
+  /* Restore sticky so the 3D canvas is always in the background */
+  .canvas-sticky-wrapper {
+    position: sticky !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  /* Panels: anchored to bottom, leaving top ~42% for the 3D model.
+     No max-height so all content is visible; overflow:hidden kills any internal scroll. */
   .scroll-fade-panel {
+    position: absolute !important;
+    bottom: 2% !important;
+    top: auto !important;
+    left: 5% !important;
+    right: 5% !important;
     width: 90% !important;
     max-width: 90% !important;
-    top: 50% !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translate(-50%, -50%) !important;
-    padding: 30px 20px !important;
-    max-height: 80vh !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    touch-action: pan-y !important;
+    padding: 20px 18px !important;
+    transform: none !important;
+  }
+
+  /* Hero overlay: contain to first 100vh */
+  .immersive-content-wrapper {
+    height: 100vh !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* Re-enable clicks inside the hero */
+  .hero-section-premium {
+    pointer-events: auto !important;
   }
 }
 
@@ -2786,16 +2805,38 @@ body {
 
 /* Mobile & Tablet Overrides (Screens <= 991px) */
 @media (max-width: 991px) {
+  /* Positioning, max-height and overflow are set by the sticky-layout block above.
+     Only compact the layout here — NO overflow-y, NO max-height overrides. */
   #overview, [id="3d-model"], #annotations, [id="3d-motions"], #download {
-    top: 50% !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translate(-50%, -50%) !important;
-    width: 92% !important;
-    max-width: 92% !important;
-    max-height: 82vh !important;
-    padding: 30px 20px !important;
-    overflow-y: auto !important;
+    width: 90% !important;
+    max-width: 90% !important;
+    padding: 20px 18px !important;
+    overflow: hidden !important;
+    overflow-y: hidden !important;
+  }
+
+  /* Individual panel vertical positions.
+     #overview, #annotations, #3d-motions, #download sit high (near top);
+     #3d-model stays at bottom: 2% as set by the sticky-layout block above. */
+  #overview {
+    top: 8% !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  #annotations {
+    top: calc(8% + 20px) !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  [id="3d-motions"] {
+    top: calc(8% + 20px) !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  #download {
+    top: 8% !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 
   #overview .section-title,
